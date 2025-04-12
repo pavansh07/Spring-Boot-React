@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: react-employee-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: springboot-employee-api
+          envVarKey: RENDER_EXTERNAL_URL
+          suffix: /api
