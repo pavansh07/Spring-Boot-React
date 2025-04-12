@@ -1,0 +1,26 @@
+services:
+  # Backend service
+  - type: web
+    name: springboot-employee-api
+    env: docker
+    plan: free
+    rootDir: SpringBot-DB
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/employees
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: ALLOWED_ORIGINS
+        value: https://react-employee-frontend.onrender.com
+  
+  # Frontend service
+  - type: web
+    name: react-employee-frontend
+    env: static
+    plan: free
+    rootDir: react-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://springboot-employee-api.onrender.com/api
