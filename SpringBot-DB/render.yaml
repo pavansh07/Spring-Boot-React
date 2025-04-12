@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: springboot-employee-api
+    env: docker
+    plan: free
+    healthCheckPath: /api/employees
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: ALLOWED_ORIGINS
+        fromService:
+          type: web
+          name: react-employee-frontend
+          envVarKey: RENDER_EXTERNAL_URL

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
  @Autowired
  private EmployeeRepository repository;
  @GetMapping
  public List<Employee> getAllEmployees() {
     return repository.findAll();
-    }
+    } 
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
     return repository.save(employee);
